@@ -1,3 +1,10 @@
+{% extends "base.html" %}
+
+{% block page_title %}
+    Search
+{% endblock page_title %}
+
+
 {% block search-bar %}
 {% endblock search-bar %}
 
@@ -13,16 +20,16 @@
     <h3>Result</h3>
 
     {% for room in rooms %}
-        <h3>{{room.name}}</h3>
-    {% endfor %}
+    <h3>{{room.name}}</h3>
+{% endfor %}
 
     <h5>
-    {% if rooms.has_previous %}
+        {% if rooms.has_previous %}
         <a href="{{path}}&page={{rooms.previous_page_number}}">Previous</a>
-    {% endif %}
-    Page {{rooms.number}} of {{rooms.paginator.num_pages}}
-    {% if rooms.has_next %}
+        {% endif %}
+        Page {{rooms.number}} of {{rooms.paginator.num_pages}}
+        {% if rooms.has_next %}
         <a href="{{path}}&page={{rooms.next_page_number}}">Next</a>
-    {% endif %}
+        {% endif %}
     </h5>
 {% endblock content %}

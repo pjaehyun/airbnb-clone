@@ -1,5 +1,7 @@
 from django import forms
 from . import models
+from django.contrib.auth import password_validation
+from django.core.exceptions import ValidationError
 
 
 class LoginForm(forms.Form):
@@ -37,6 +39,16 @@ class SignUpForm(forms.ModelForm):
             raise forms.ValidationError("Password confirmation does not match")
         else:
             return password
+
+    def _post_clean(self):
+        super()._post_clean()
+
+        password = self.cleaned_data.get("password1")
+        if password:
+            try:
+                password_validation.validate_password(password, self.instance)
+            except ValidationError as error:
+                self.add_error("password1", error)
 
     def save(self, *args, **kwargs):
         user = super().save(commit=False)

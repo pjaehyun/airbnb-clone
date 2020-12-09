@@ -139,3 +139,5 @@ cython_debug/
 
 # Linux
 uploads/
+node_modules/
+.prettierignore

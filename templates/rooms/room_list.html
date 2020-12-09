@@ -7,24 +7,32 @@
 
 {% block content %}
 
+    <div class="container mx-auto pb-10">
+        <div class="rounded-xl -mx-24 bg-gray-800 h-50vh mt-32 mb-24 bg-cover bg-center" style="background-image:url(https://images.unsplash.com/photo-1437719417032-8595fd9e9dc6?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1267&q=80)"></div>
+        
+        <div class="flex flex-wrap -mx-24 mb-10">
+            {% for room in rooms %}
+                {% include "partials/room_card.html" with room=room %}
+            {% endfor %}
+        </div>
+        <div class="flex items-center justify-center mx-auto container">
+            {% if page_obj.has_previous %}
+                <a href="/?page={{page_obj.previous_page_number}}" class="text-green-600">
+                    <i class="fas fa-arrow-left fa-lg"></i>
+                </a>
+            {% endif %}
 
-    {% for room in rooms %}
-        <h4>
-        <a href="{% url "rooms:detail" room.pk %}">{{room.name}} / ${{room.price}}</a>
-        </h4>
-    {% endfor %}
+            <span class="mx-3 font-medium text-lg">{{page_obj.number}} of {{page_obj.paginator.num_pages}}</span>
 
-    <h5>
-    {% if page_obj.has_previous %}
-        <a href="/?page={{page_obj.previous_page_number}}">Previous</a>
-    {% endif %}
+            {% if page_obj.has_next %}
+                <a href="/?page={{page_obj.next_page_number}}" class="text-green-600">
+                    <i class="fas fa-arrow-right fa-lg"></i>
+                </a>
+            {% endif %}
+        </div>
+    </div>
 
-    Page {{page_obj.number}} of {{page_obj.paginator.num_pages}}
 
-    {% if page_obj.has_next %}
-        <a href="/?page={{page_obj.next_page_number}}">Next</a>
-    {% endif %}
-    </h5>
 
     {% comment %} *** pagination of Django ***
     {% for room in page.object_list %}

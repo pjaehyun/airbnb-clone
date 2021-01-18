@@ -1,6 +1,7 @@
 import os
 import requests
 from django.views import View
+from django.contrib.auth.views import PasswordChangeView
 from django.views.generic import FormView, DetailView, UpdateView
 from django.urls import reverse_lazy
 from django.shortcuts import render, redirect, reverse
@@ -215,7 +216,6 @@ class UpdateProfileView(UpdateView):
     model = models.User
     template_name = "users/update-profile.html"
     fields = (
-        "email",
         "first_name",
         "last_name",
         "avatar",
@@ -229,25 +229,20 @@ class UpdateProfileView(UpdateView):
     def get_object(self, queryset=None):
         return self.request.user
 
-    def form_valid(self, form):
-        email = form.clean_data.get("email")
-        self.object.username = email
-        self.object.save()
-        return super().form_valid(form)
+    def get_form(self, form_class=None):
+        form = super().get_form(form_class=form_class)
+        form.fields["birthdate"].widget.attrs = {"placeholder": "Birthdate"}
+        form.fields["first_name"].widget.attrs = {"placeholder": "First name"}
+        return form
 
-    """ FBV Login """
 
-    # def get(self, request):
-    #     form = forms.LoginForm()
-    #     return render(request, "users/login.html", {"form": form})
+class UpdatePasswordView(PasswordChangeView):
 
-    # def post(self, request):
-    #     form = forms.LoginForm(request.POST)
-    #     if form.is_valid():
-    #         email = form.cleaned_data.get("email")
-    #         password = form.cleaned_data.get("password")
-    #         user = authenticate(request, username=email, password=password)
-    #         if user is not None:
-    #             login(request, user)
-    #             return redirect(reverse("core:home"))
-    #     return render(request, "users/login.html", {"form": form})
+    template_name = "users/update-password.html"
+
+    def get_form(self, form_class=None):
+        form = super().get_form(form_class=form_class)
+        form.fields["old_password"].widget.attrs = {"placeholder": "Current Password"}
+        form.fields["new_password1"].widget.attrs = {"placeholder": "New Password"}
+        form.fields["new_password2"].widget.attrs = {"placeholder": "Confirm Password"}
+        return form

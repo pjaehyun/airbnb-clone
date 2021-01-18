@@ -82,22 +82,3 @@ class SignUpForm(forms.ModelForm):
         user.username = email
         user.set_password(password)
         user.save()
-
-    """ FBV validate email and save data """
-    # def clean_email(self):
-    #     email = self.cleaned_data.get("email")
-    #     try:
-    #         models.User.objects.get(email=email)
-    #         raise forms.ValidationError("User already exists with that email")
-    #     except models.User.DoesNotExist:
-    #         return email
-    # def save(self):
-    #     first_name = self.cleaned_data.get("first_name")
-    #     last_name = self.cleaned_data.get("last_name")
-    #     email = self.cleaned_data.get("email")
-    #     password = self.cleaned_data.get("password")
-
-    #     user = models.User.objects.create_user(email, email, password)
-    #     user.first_name = first_name
-    #     user.last_name = last_name
-    #     user.save()

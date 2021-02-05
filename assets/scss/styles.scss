@@ -19,6 +19,23 @@
 .btn-link {
   @apply text-center rounded-lg py-3 text-lg font-light w-full text-white bg-red-500;
 }
+
+.message {
+  animation: messageFadeIn 5s ease-in-out forwards;
+  &.error {
+    @apply bg-red-600;
+  }
+  &.info {
+    @apply bg-blue-500;
+  }
+  &.success {
+    @apply bg-green-500;
+  }
+  &.warning {
+    @apply bg-yellow-400;
+  }
+}
+
 input,
 textarea,
 select {
@@ -32,6 +49,8 @@ textarea {
 
 select {
   height: 50px;
+  padding-top: 0%;
+  padding-bottom: 0%;
 }
 
 form {
@@ -61,22 +80,6 @@ form {
   100% {
     opacity: 0;
     transform: translateY(-50px);
-  }
-}
-
-.message {
-  animation: messageFadeIn 5s ease-in-out forwards;
-  &.error {
-    @apply bg-red-600;
-  }
-  &.info {
-    @apply bg-blue-500;
-  }
-  &.success {
-    @apply bg-green-500;
-  }
-  &.warning {
-    @apply bg-yellow-400;
   }
 }
 

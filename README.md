@@ -26,13 +26,15 @@ AirBnb 클론코딩 by Nomad Coders(인터넷 강의)
 # 5. 핵심 기능
 <details>
 <summary>각 테이블 별 CRUD</summary>
-- 사용자 CRUD
-- 리뷰 CRUD
-- 게시글 CRUD
+  <ul>
+<li>사용자 CRUD</li>
+<li>리뷰 CRUD</li>
+<li>게시글 CRUD</li>
+  </ul>
 </details>
 </br>
-- 검색 기능
-- 이미지 업로드 기능
+<li>검색 기능</li>
+<li>이미지 업로드 기능</li>
 </br></br>
 
 # 6. 화면 구성
